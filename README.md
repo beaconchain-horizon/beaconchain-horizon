@@ -1,8 +1,5 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/World%20Rank-%233%20Global-brightgreen" alt="World Rank #3">
-  <img src="https://img.shields.io/badge/Security-10%2F10-ff69b4" alt="Security 10/10">
   <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPLv3">
-  <img src="https://img.shields.io/badge/Offline‑First-ready-4ade80" alt="Offline‑First">
 </p>
 
 <h1 align="center">🔭 Horizon · Independent Blockchain Ecosystem</h1>
@@ -24,9 +21,6 @@
 
 | Achievement | Details |
 | :--- | :--- |
-| **World Rank #3** | Among top open‑source blockchain monitors (May 2026 evaluation) |
-| **Perfect Security Score** | **10/10** – CSP, XSS prevention, GDPR compliant |
-| **100K+ Validators** | Fully scalable dashboard with virtual scrolling and offline cache |
 | **Validator #0** | Operator of the first Ethereum validator (since 2021) |
 
 ---
