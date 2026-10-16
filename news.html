@@ -8,9 +8,10 @@
 <style>
 .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 20px; }
 .news-col h3 { color: var(--accent); font-size: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-.news-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 14px; margin-bottom: 12px; transition: border-color 0.2s; }
+.news-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 12px; margin-bottom: 12px; transition: border-color 0.2s; }
 .news-item:hover { border-color: var(--accent2); }
 .news-item a { color: var(--fg); text-decoration: none; display: block; }
+.news-item img { width: 100%; height: 140px; object-fit: cover; border-radius: 4px; margin-bottom: 10px; display: block; }
 .news-item .title { font-size: 14px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
 .news-item .meta { color: var(--muted); font-size: 11px; display: flex; justify-content: space-between; }
 .news-item .source { color: var(--accent2); text-transform: uppercase; letter-spacing: 0.5px; font-size: 10px; }
@@ -42,113 +43,98 @@
   </div>
 
   <div class="news-grid">
-    <div class="news-col">
-      <h3>₿ Bitcoin</h3>
-      <div id="btcNews" class="loading">Loading...</div>
-    </div>
-    <div class="news-col">
-      <h3>Ξ Ethereum</h3>
-      <div id="ethNews" class="loading">Loading...</div>
-    </div>
-    <div class="news-col">
-      <h3>🏦 Banking &amp; Altcoins</h3>
-      <div id="altNews" class="loading">Loading...</div>
-    </div>
+    <div class="news-col"><h3>₿ Bitcoin</h3><div id="btcNews" class="loading">Loading...</div></div>
+    <div class="news-col"><h3>Ξ Ethereum</h3><div id="ethNews" class="loading">Loading...</div></div>
+    <div class="news-col"><h3>🏦 Banking &amp; Altcoins</h3><div id="altNews" class="loading">Loading...</div></div>
   </div>
 </section>
 
-
 <script>
-const PROXY = "https://api.allorigins.win/raw?url=";
-
 const FEEDS = {
-  btcNews: [
-    { url: "https://cointelegraph.com/rss", label: "COINTELEGRAPH" },
-    { url: "https://bitcoinmagazine.com/feed", label: "BITCOIN MAGAZINE" }
+  bitcoin: [
+    { url: "https://cointelegraph.com/rss",        label: "COINTELEGRAPH" },
+    { url: "https://bitcoinmagazine.com/feed",     label: "BITCOIN MAG" },
+    { url: "https://news.bitcoin.com/feed/",       label: "NEWS.BITCOIN" }
   ],
-  ethNews: [
-    { url: "https://cryptoslate.com/feed/", label: "CRYPTOSLATE" },
-    { url: "https://decrypt.co/feed", label: "DECRYPT" }
+  ethereum: [
+    { url: "https://cryptoslate.com/feed/",        label: "CRYPTOSLATE" },
+    { url: "https://decrypt.co/feed",              label: "DECRYPT" },
+    { url: "https://cryptobriefing.com/feed/",     label: "CRYPTO BRIEFING" }
   ],
-  altNews: [
-    { url: "https://www.theblock.co/rss.xml", label: "THE BLOCK" },
-    { url: "https://www.coindesk.com/arc/outboundfeeds/rss/", label: "COINDESK" }
+  altcoin: [
+    { url: "https://www.theblock.co/rss.xml",      label: "THE BLOCK" },
+    { url: "https://www.coindesk.com/arc/outboundfeeds/rss/", label: "COINDESK" },
+    { url: "https://cryptonews.com/news/feed/",    label: "CRYPTONEWS" }
   ]
 };
+const PROXY = "https://api.allorigins.win/raw?url=";
 
-function getImage(item) {
+function extractImage(item) {
   const media = item.getElementsByTagName("media:content")[0] || item.getElementsByTagName("media:thumbnail")[0];
   if (media && media.getAttribute("url")) return media.getAttribute("url");
-  const enc = item.getElementsByTagName("enclosure")[0];
-  if (enc && enc.getAttribute("url") && (enc.getAttribute("type") || "").startsWith("image")) return enc.getAttribute("url");
-  const html = (item.getElementsByTagName("content:encoded")[0]?.textContent) || (item.getElementsByTagName("description")[0]?.textContent) || "";
-  const m = html.match(/<img[^>]+src=["\x27]([^"\x27]+)["\x27]/i);
-  return m ? m[1] : "";
+  const enc = item.querySelector("enclosure");
+  if (enc && (enc.getAttribute("type") || "").indexOf("image") === 0) return enc.getAttribute("url");
+  const encoded = item.getElementsByTagName("content:encoded")[0];
+  if (encoded) {
+    const m = (encoded.textContent || "").match(/<img[^>]+src=["\x27]([^"\x27]+)["\x27]/);
+    if (m) return m[1];
+  }
+  const desc = item.querySelector("description");
+  if (desc) {
+    const m = (desc.textContent || "").match(/<img[^>]+src=["\x27]([^"\x27]+)["\x27]/);
+    if (m) return m[1];
+  }
+  return "";
 }
 
-function parseRSS(xmlText, container) {
-  try {
-    const xml = new DOMParser().parseFromString(xmlText, "text/xml");
-    const items = xml.querySelectorAll("item");
-    if (items.length === 0) return false;
-    const html = Array.from(items).slice(0, 8).map(item => {
-      const title = item.querySelector("title")?.textContent?.trim() || "Untitled";
-      const link = item.querySelector("link")?.textContent?.trim() || "#";
-      const date = item.querySelector("pubDate")?.textContent || "";
-      const source = item.querySelector("source")?.textContent || "";
-      let dateStr = "";
-      if (date) { try { dateStr = new Date(date).toLocaleDateString("en-US",{month:"short",day:"numeric"}); } catch(e){} }
-      const img = getImage(item);
-      const safeTitle = title.replace(/</g,"&lt;").replace(/>/g,"&gt;");
-      const safeSource = (source || "").replace(/</g,"&lt;");
-      const imgTag = img ? `<img src="${img}" alt="" style="width:100%;height:120px;object-fit:cover;border-radius:4px;margin-bottom:8px;" onerror="this.style.display=\x27none\x27">` : "";
-      return `<div class="news-item"><a href="${link}" target="_blank" rel="noopener">
-        ${imgTag}
-        <div class="title">${safeTitle}</div>
-        <div class="meta"><span class="source">${safeSource}</span><span>${dateStr}</span></div>
-      </a></div>`;
-    }).join("");
-    container.innerHTML = html;
-    return true;
-  } catch (e) { return false; }
+function parseRSS(xmlText, container, label) {
+  const parser = new DOMParser();
+  const xml = parser.parseFromString(xmlText, "text/xml");
+  const items = xml.querySelectorAll("item, entry");
+  if (items.length === 0) return false;
+  const html = Array.from(items).slice(0, 8).map(item => {
+    const title = (item.querySelector("title")?.textContent || "Untitled").trim();
+    let link = item.querySelector("link")?.textContent || "";
+    if (!link) { const el = item.querySelector("link"); if (el) link = el.getAttribute("href") || ""; }
+    const date = item.querySelector("pubDate")?.textContent || item.querySelector("updated")?.textContent || "";
+    const img = extractImage(item);
+    let dateStr = "";
+    if (date) { try { dateStr = new Date(date).toLocaleDateString("en-US",{month:"short",day:"numeric"}); } catch(e){} }
+    const safeTitle = title.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    const imgHtml = img ? `<img src="${img}" alt="" loading="lazy" onerror="this.style.display=\x27none\x27">` : "";
+    return `<div class="news-item"><a href="${link}" target="_blank" rel="noopener">${imgHtml}<div class="title">${safeTitle}</div><div class="meta"><span class="source">${label}</span><span>${dateStr}</span></div></a></div>`;
+  }).join("");
+  container.innerHTML = html;
+  return true;
 }
 
-async function fetchRSS(feedList, container) {
-  for (const feed of feedList) {
+async function fetchRSSWithFallback(feeds, container) {
+  for (const feed of feeds) {
     try {
       const r = await fetch(PROXY + encodeURIComponent(feed.url));
       if (!r.ok) continue;
       const text = await r.text();
-      if (parseRSS(text, container)) return;
+      if (parseRSS(text, container, feed.label)) return;
     } catch (e) { continue; }
   }
-  container.innerHTML = "<div class=\"loading\">Feed temporarily unavailable</div>";
+  container.innerHTML = `<div class="loading">Feed temporarily unavailable. <a href="#" onclick="loadAll();return false;" style="color:var(--accent2)">Retry</a></div>`;
 }
 
 async function loadAll() {
-  ["btcNews","ethNews","altNews"].forEach(id => {
-    const el = document.getElementById(id);
-    el.className = "loading";
-    el.textContent = "Loading...";
-  });
+  ["btcNews","ethNews","altNews"].forEach(id => { const el = document.getElementById(id); el.className="loading"; el.textContent="Loading..."; });
   document.getElementById("lastUpdate").textContent = "Updating " + new Date().toLocaleTimeString();
-
   await Promise.all([
-    fetchRSS(FEEDS.btcNews, document.getElementById("btcNews")),
-    fetchRSS(FEEDS.ethNews, document.getElementById("ethNews")),
-    fetchRSS(FEEDS.altNews, document.getElementById("altNews"))
+    fetchRSSWithFallback(FEEDS.bitcoin,  document.getElementById("btcNews")),
+    fetchRSSWithFallback(FEEDS.ethereum, document.getElementById("ethNews")),
+    fetchRSSWithFallback(FEEDS.altcoin,  document.getElementById("altNews"))
   ]);
-
   document.getElementById("lastUpdate").textContent = "Last updated: " + new Date().toLocaleTimeString();
 }
-
 loadAll();
 setInterval(loadAll, 300000);
 </script>
 
-<footer>
-  <p>© 2026 Beaconchain Horizon · News aggregated from public sources</p>
-</footer>
+<footer><p>© 2026 Beaconchain Horizon · News aggregated from public sources</p></footer>
 
 </body>
 </html>
