@@ -102,7 +102,32 @@ code { background: var(--bg2); padding: 2px 6px; border-radius: 3px; font-size: 
     <a href="verify.html">Independent Verification <span class="arrow">→</span></a>
     <a href="https://beaconchain-horizon.github.io/horizon-security-assessment/offline-license.html" target="_blank">License Generator <span class="arrow">→</span></a>
     <a href="https://github.com/beaconchain-horizon/beaconchain-horizon" target="_blank">Audit Report <span class="arrow">→</span></a>
-    <a href="https://github.com/beaconchain-horizon/horizon-core" target="_blank">Source Repository <span class="arrow">→</span></a>
+  </div>
+</section>
+<section>
+  <h2>Independent Verification — Terminal Commands</h2>
+  <p style="color:var(--muted);margin-bottom:16px;font-size:14px;">Every claim in this system can be verified from a fresh terminal. No vendor trust required.</p>
+
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:20px;font-family:monospace;font-size:13px;line-height:1.8;overflow-x:auto;">
+    <div style="color:var(--muted);margin-bottom:6px;"># 1 — Clone the audit repository (public)</div>
+    <div style="color:var(--accent);">$ git clone github.com/beaconchain-horizon/beaconchain-horizon</div>
+    <div style="height:12px;"></div>
+    <div style="color:var(--muted);margin-bottom:6px;"># 2 — Verify chain integrity (requires running ledger)</div>
+    <div style="color:var(--accent);">$ curl -s localhost:8080/api/v1/chain/info</div>
+    <div style="height:12px;"></div>
+    <div style="color:var(--muted);margin-bottom:6px;"># 3 — Inspect all blocks and transactions</div>
+    <div style="color:var(--accent);">$ curl -s "localhost:8080/api/v1/blocks?limit=10"</div>
+    <div style="height:12px;"></div>
+    <div style="color:var(--muted);margin-bottom:6px;"># 4 — Run the TPS benchmark</div>
+    <div style="color:var(--accent);">$ bash tps-report.sh</div>
+    <div style="height:12px;"></div>
+    <div style="color:var(--muted);margin-bottom:6px;"># 5 — Run the 192-vector security suite</div>
+    <div style="color:var(--accent);">$ ./pentest.exe -url http://localhost:8080</div>
+    <div style="height:12px;"></div>
+    <div style="color:var(--muted);margin-bottom:6px;"># 6 — Verify any block signature with secp256k1</div>
+    <div style="color:var(--accent);">$ openssl pkeyutl -verify -pubin -inkey pub.pem ...</div>
+    <div style="height:16px;"></div>
+    <div style="color:var(--muted);font-size:12px;border-top:1px solid var(--border);padding-top:12px;">Standards: <span style="color:var(--accent);">secp256k1 (SEC 2)</span> · <span style="color:var(--accent);">RFC 6979</span> · <span style="color:var(--accent);">BIP-62</span> · <span style="color:var(--accent);">FIPS 180-4</span> · <span style="color:var(--accent);">ISO/IEC 25010</span></div>
   </div>
 </section>
 <footer>
