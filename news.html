@@ -57,58 +57,68 @@
   </div>
 </section>
 
+
 <script>
-const API = "https://cryptocurrency.cv/api";
+const FEEDS = {
+  bitcoin:  "https://cointelegraph.com/rss",
+  ethereum: "https://cryptoslate.com/feed/",
+  altcoin:  "https://www.theblock.co/rss.xml"
+};
 const PROXY = "https://api.allorigins.win/raw?url=";
 
-function renderNews(items, container) {
-  if (!items || items.length === 0) {
-    container.innerHTML = "<div class=\"loading\">No news available</div>";
-    return;
-  }
-  const html = items.slice(0, 8).map(item => {
-    const title = item.title || item.headline || "Untitled";
-    const url = item.url || item.link || "#";
-    const source = item.source || item.source_info?.name || "NEWS";
-    const date = item.published_at || item.date || item.pubDate || "";
-    let dateStr = "";
-    if (date) {
-      try { dateStr = new Date(date).toLocaleDateString("en-US", {month:"short", day:"numeric"}); } catch(e) {}
+function parseRSS(xmlText, container, label) {
+  try {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(xmlText, "text/xml");
+    const items = xml.querySelectorAll("item");
+    if (items.length === 0) {
+      container.innerHTML = "<div class=\"loading\">No items in feed</div>";
+      return;
     }
-    return `<div class="news-item"><a href="${url}" target="_blank" rel="noopener">
-      <div class="title">${title}</div>
-      <div class="meta"><span class="source">${source}</span><span>${dateStr}</span></div>
-    </a></div>`;
-  }).join("");
-  container.innerHTML = html;
+    const html = Array.from(items).slice(0, 8).map(item => {
+      const title = item.querySelector("title")?.textContent || "Untitled";
+      const link = item.querySelector("link")?.textContent || "#";
+      const date = item.querySelector("pubDate")?.textContent || "";
+      let dateStr = "";
+      if (date) {
+        try { dateStr = new Date(date).toLocaleDateString("en-US", {month:"short", day:"numeric"}); } catch(e) {}
+      }
+      const safeTitle = title.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      return `<div class="news-item"><a href="${link}" target="_blank" rel="noopener">
+        <div class="title">${safeTitle}</div>
+        <div class="meta"><span class="source">${label}</span><span>${dateStr}</span></div>
+      </a></div>`;
+    }).join("");
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = `<div class="loading">Parse error: ${e.message}</div>`;
+  }
 }
 
-async function fetchNews(path, container) {
+async function fetchRSS(url, container, label) {
   try {
-    const r = await fetch(PROXY + encodeURIComponent(API + path));
+    const r = await fetch(PROXY + encodeURIComponent(url));
     if (!r.ok) throw new Error("HTTP " + r.status);
-    const j = await r.json();
-    const items = Array.isArray(j) ? j : (j.data || j.news || j.results || []);
-    renderNews(items, container);
+    const text = await r.text();
+    parseRSS(text, container, label);
   } catch (e) {
     container.innerHTML = `<div class="loading">Error: ${e.message}</div>`;
   }
 }
 
 async function loadAll() {
-  document.getElementById("btcNews").className = "loading";
-  document.getElementById("btcNews").textContent = "Loading...";
-  document.getElementById("ethNews").className = "loading";
-  document.getElementById("ethNews").textContent = "Loading...";
-  document.getElementById("altNews").className = "loading";
-  document.getElementById("altNews").textContent = "Loading...";
+  ["btcNews","ethNews","altNews"].forEach(id => {
+    const el = document.getElementById(id);
+    el.className = "loading";
+    el.textContent = "Loading...";
+  });
 
   document.getElementById("lastUpdate").textContent = "Updating " + new Date().toLocaleTimeString();
 
   await Promise.all([
-    fetchNews("/bitcoin", document.getElementById("btcNews")),
-    fetchNews("/ethereum", document.getElementById("ethNews")),
-    fetchNews("/altcoin", document.getElementById("altNews"))
+    fetchRSS(FEEDS.bitcoin,  document.getElementById("btcNews"), "COINTELEGRAPH"),
+    fetchRSS(FEEDS.ethereum, document.getElementById("ethNews"), "CRYPTOSLATE"),
+    fetchRSS(FEEDS.altcoin,  document.getElementById("altNews"), "THE BLOCK")
   ]);
 
   document.getElementById("lastUpdate").textContent = "Last updated: " + new Date().toLocaleTimeString();
