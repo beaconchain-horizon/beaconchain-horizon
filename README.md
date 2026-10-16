@@ -14,8 +14,8 @@
 
 🌍 **GLOBAL · INTEROPERABLE · SOVEREIGN-NEUTRAL** 🌍
 
-🇺🇸 🇬🇧 🇨🇭 🇩🇪 🇫🇷 🇯🇵 🇨🇳 🇷🇺 🇮🇷 🇮🇳 🇧🇷 🇨🇦
-🇦🇺 🇰🇷 🇮🇹 🇪🇸 🇸🇪 🇸🇬 🇦🇪 🇹🇷 🇸🇦 🇶🇦 🇿🇦 🇳🇱
+<img src="assets/flags/us.svg" width="28" alt="US"> <img src="assets/flags/gb.svg" width="28" alt="GB"> <img src="assets/flags/ch.svg" width="28" alt="CH"> <img src="assets/flags/de.svg" width="28" alt="DE"> <img src="assets/flags/fr.svg" width="28" alt="FR"> <img src="assets/flags/jp.svg" width="28" alt="JP"> <img src="assets/flags/cn.svg" width="28" alt="CN"> <img src="assets/flags/ru.svg" width="28" alt="RU"> <img src="assets/flags/ir.svg" width="28" alt="IR"> <img src="assets/flags/in.svg" width="28" alt="IN"> <img src="assets/flags/br.svg" width="28" alt="BR"> <img src="assets/flags/ca.svg" width="28" alt="CA">
+<img src="assets/flags/au.svg" width="28" alt="AU"> <img src="assets/flags/kr.svg" width="28" alt="KR"> <img src="assets/flags/it.svg" width="28" alt="IT"> <img src="assets/flags/es.svg" width="28" alt="ES"> <img src="assets/flags/se.svg" width="28" alt="SE"> <img src="assets/flags/sg.svg" width="28" alt="SG"> <img src="assets/flags/ae.svg" width="28" alt="AE"> <img src="assets/flags/tr.svg" width="28" alt="TR"> <img src="assets/flags/sa.svg" width="28" alt="SA"> <img src="assets/flags/qa.svg" width="28" alt="QA"> <img src="assets/flags/za.svg" width="28" alt="ZA"> <img src="assets/flags/nl.svg" width="28" alt="NL">
 
 ![Version](https://img.shields.io/badge/Version-1.4-0ea5e9?style=for-the-badge)
 ![Date](https://img.shields.io/badge/Date-2026--10--16-38bdf8?style=for-the-badge)
