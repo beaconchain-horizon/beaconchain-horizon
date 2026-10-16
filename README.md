@@ -29,38 +29,8 @@
 
 > **This document is a citable, reproducible audit record.** Every claim below can be independently verified using the terminal commands provided. No trust in the vendor is required.
 
-```
-+---------------------------------------------------------------+
-|  HORIZON CORE v1.4 - VERIFIED AUDIT RECORD                    |
-|  Audit Date:     2026-10-16                                    |
-|  Environment:    Windows 8-core laptop                         |
-|  Standard:       ISO/IEC 25010 - Performance Efficiency        |
-+---------------------------------------------------------------+
-|                                                               |
-|  CHAIN STATE                                                  |
-|    Height:          4  (genesis + 4 blocks)                    |
-|    Total TX:        4                                          |
-|    Persistence:     ON DISK (survives restart)                 |
-|                                                               |
-|  PERFORMANCE                                                  |
-|    Ledger Peak:     308,641 TPS                                |
-|    Consensus:       95 ms / cycle (7 nodes parallel)           |
-|    Register:        141 ms round-trip                          |
-|    Buffer Guard:    413 on >8MB body                           |
-|                                                               |
-|  SECURITY                                                     |
-|    Attack Vectors:  192 / 192 BLOCKED                          |
-|    Server Errors:   0                                          |
-|    Curve:           secp256k1 (SEC 2 v2)                       |
-|    Determinism:     RFC 6979                                   |
-|    Low-S:           BIP-62 enforced                            |
-|                                                               |
-|  NODE LAW                                                     |
-|    Hash:            3ac449e02f8e6410...                        |
-|    Consistency:     7 / 7 nodes identical                      |
-|                                                               |
-+---------------------------------------------------------------+
-```
+<img src="assets/audit-summary.svg" alt="Horizon Core v1.4 — Verified Audit Record" width="100%">
+
 
 **Citation:**
 
