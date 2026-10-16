@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Monitor — Beaconchain Horizon</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.stat { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+.stat h4 { font-size: 11px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+.stat .v { font-size: 22px; color: var(--accent); font-weight: 700; word-break: break-all; }
+.block-row { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 14px; margin-bottom: 10px; font-family: monospace; font-size: 12px; }
+.block-row .num { color: var(--accent); font-weight: 700; font-size: 14px; }
+.block-row .hash { color: var(--muted); word-break: break-all; margin-top: 4px; }
+.block-row .root { color: var(--accent2); word-break: break-all; margin-top: 4px; }
+.controls { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 12px; color: var(--muted); }
+.controls button { background: transparent; border: 1px solid var(--border); color: var(--accent2); padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+.controls button:hover { border-color: var(--accent2); }
+.controls input { background: var(--bg); border: 1px solid var(--border); color: var(--fg); padding: 6px 10px; border-radius: 4px; font-size: 12px; width: 60px; }
+.loading { color: var(--muted); font-style: italic; padding: 12px 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">🔭 BEACONCHAIN HORIZON</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="monitor.html">Monitor</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="verify.html">Verify</a></li>
+    <li><a href="https://github.com/beaconchain-horizon" target="_blank">GitHub</a></li>
+  </ul>
+</nav>
+
+<section>
+  <h2>Live Chain Monitor</h2>
+  <div class="stats-row">
+    <div class="stat"><h4>Chain Height</h4><div class="v" id="height">—</div></div>
+    <div class="stat"><h4>Total TX</h4><div class="v" id="txtotal">—</div></div>
+    <div class="stat"><h4>Latest Hash</h4><div class="v" id="lasthash" style="font-size:13px;">—</div></div>
+    <div class="stat"><h4>Latest Root</h4><div class="v" id="lastroot" style="font-size:13px;">—</div></div>
+  </div>
+
+  <div class="controls">
+    <button onclick="loadAll()">Refresh</button>
+    <label>Show last <input type="number" id="limit" value="10" min="1" max="50"> blocks</label>
+    <span id="lastUpdate">Loading...</span>
+  </div>
+
+  <div id="blocks"><div class="loading">Loading blocks...</div></div>
+</section>
+
+<script>
+const BE = "http://localhost:8080";
+
+async function loadStats() {
+  try {
+    const r = await fetch(BE + "/api/v1/chain/info");
+    const j = await r.json();
+    document.getElementById("height").textContent = j.height;
+    document.getElementById("txtotal").textContent = j.tx_total;
+    document.getElementById("lasthash").textContent = (j.latest_hash||"").slice(0,20) + "…";
+    document.getElementById("lastroot").textContent = (j.latest_root||"").slice(0,20) + "…";
+  } catch (e) {
+    ["height","txtotal"].forEach(id => document.getElementById(id).textContent = "offline");
+  }
+}
+
+async function loadBlocks() {
+  const el = document.getElementById("blocks");
+  const limit = document.getElementById("limit").value || 10;
+  try {
+    const r = await fetch(BE + "/api/v1/blocks?limit=" + limit);
+    const j = await r.json();
+    const blocks = j.blocks || [];
+    if (blocks.length === 0) { el.innerHTML = "<div class=\"loading\">No blocks yet</div>"; return; }
+    el.innerHTML = blocks.map(b => `
+      <div class="block-row">
+        <div><span class="num">Block #${b.number}</span> · ${b.tx_count} tx · ${b.merkle_type}</div>
+        <div class="hash">hash: ${b.block_hash || b.hash}</div>
+        <div class="root">root: ${b.merkle_root}</div>
+        <div class="hash">prev: ${b.previous_hash}</div>
+      </div>`
+    ).join("");
+  } catch (e) {
+    el.innerHTML = `<div class="loading">Error: ${e.message}</div>`;
+  }
+}
+
+async function loadAll() {
+  document.getElementById("lastUpdate").textContent = "Updating " + new Date().toLocaleTimeString();
+  await Promise.all([loadStats(), loadBlocks()]);
+  document.getElementById("lastUpdate").textContent = "Last updated: " + new Date().toLocaleTimeString();
+}
+
+loadAll();
+setInterval(loadAll, 10000);
+</script>
+
+<footer><p>© 2026 Beaconchain Horizon · Live Monitor</p></footer>
+
+</body>
+</html>
