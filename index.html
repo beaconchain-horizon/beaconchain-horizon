@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beaconchain Horizon — Offline-First Tamper-Evident Ledger</title>
+<meta name="description" content="Beaconchain Horizon — offline-first tamper-evident ledger for banking, industry, and air-gapped environments.">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --bg2: #111827;
+  --fg: #e6edf3;
+  --muted: #8b949e;
+  --accent: #7ee787;
+  --accent2: #58a6ff;
+  --border: #30363d;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+a { color: var(--accent2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+nav {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav .brand { font-weight: 700; font-size: 18px; color: var(--accent); letter-spacing: 1px; }
+nav ul { list-style: none; display: flex; gap: 24px; }
+nav ul a { color: var(--muted); font-size: 14px; font-weight: 500; }
+nav ul a:hover { color: var(--accent); text-decoration: none; }
+header { text-align: center; padding: 60px 24px 40px; }
+header pre { color: var(--accent); font-size: 10px; line-height: 1.15; overflow-x: auto; margin-bottom: 20px; }
+header h1 { font-size: 26px; margin-bottom: 12px; background: linear-gradient(135deg, #7ee787 0%, #58a6ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+header p { color: var(--muted); max-width: 640px; margin: 0 auto; font-size: 15px; }
+section { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+section h2 { font-size: 18px; color: var(--accent); margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 8px; font-weight: 600; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 20px; transition: border-color 0.2s; }
+.card:hover { border-color: var(--accent); }
+.card h3 { font-size: 12px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+.card .value { font-size: 24px; color: var(--accent); font-weight: 700; letter-spacing: 0.5px; }
+.links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.links a { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; color: var(--fg); transition: border-color 0.2s, transform 0.2s; }
+.links a:hover { border-color: var(--accent2); transform: translateX(4px); text-decoration: none; }
+.links a .arrow { color: var(--accent2); }
+footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); margin-top: 40px; color: var(--muted); font-size: 12px; }
+code { background: var(--bg2); padding: 2px 6px; border-radius: 3px; font-size: 13px; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">🔭 BEACONCHAIN HORIZON</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="monitor.html">Monitor</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="verify.html">Verify</a></li>
+    <li><a href="https://github.com/beaconchain-horizon" target="_blank">GitHub</a></li>
+  </ul>
+</nav>
+
+<header>
+<pre>
+  ██╗  ██╗ ██████╗ ██████╗ ██╗███████╗ ██████╗ ███╗   ██╗
+  ██║  ██║██╔═══██╗██╔══██╗██║╚══███╔╝██╔═══██╗████╗  ██║
+  ███████║██║   ██║██████╔╝██║  ███╔╝ ██║   ██║██╔██╗ ██║
+  ██╔══██║██║   ██║██╔══██╗██║ ███╔╝  ██║   ██║██║╚██╗██║
+  ██║  ██║╚██████╔╝██║  ██║██║███████╗╚██████╔╝██║ ╚████║
+  ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝
+</pre>
+<h1>Offline-First Tamper-Evident Ledger</h1>
+<p>Banking · Industry · Air-Gap · Cryptographic Audit</p>
+</header>
+<section>
+  <h2>Live Network State</h2>
+  <div class="cards">
+    <div class="card"><h3>Chain Height</h3><div class="value" id="height">—</div></div>
+    <div class="card"><h3>Total TX</h3><div class="value" id="txtotal">—</div></div>
+    <div class="card"><h3>Node Law</h3><div class="value" id="lawhash">—</div></div>
+    <div class="card"><h3>Peak TPS</h3><div class="value">308,641</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Quick Access</h2>
+  <div class="links">
+    <a href="monitor.html">Live Monitor <span class="arrow">→</span></a>
+    <a href="news.html">Blockchain News <span class="arrow">→</span></a>
+    <a href="verify.html">Independent Verification <span class="arrow">→</span></a>
+    <a href="https://beaconchain-horizon.github.io/horizon-security-assessment/offline-license.html" target="_blank">License Generator <span class="arrow">→</span></a>
+    <a href="https://github.com/beaconchain-horizon/beaconchain-horizon" target="_blank">Audit Report <span class="arrow">→</span></a>
+    <a href="https://github.com/beaconchain-horizon/horizon-core" target="_blank">Source Repository <span class="arrow">→</span></a>
+  </div>
+</section>
+<footer>
+  <p>© 2026 Beaconchain Horizon · Offline · Verifiable · Industrial-Grade</p>
+  <p style="margin-top:8px;font-size:11px;">secp256k1 · RFC 6979 · BIP-62 · FIPS 180-4 · ISO/IEC 25010</p>
+</footer>
+
+<script>
+async function loadStats() {
+  try {
+    const BE = "http://localhost:8080";
+    const r1 = await fetch(BE + "/api/v1/chain/info");
+    const j = await r1.json();
+    document.getElementById("height").textContent = j.height;
+    document.getElementById("txtotal").textContent = j.tx_total;
+    const r2 = await fetch("http://localhost:9001/health");
+    const h = await r2.json();
+    document.getElementById("lawhash").textContent = h.law_hash.slice(0, 12) + "…";
+  } catch (e) {
+    document.getElementById("height").textContent = "offline";
+    document.getElementById("txtotal").textContent = "—";
+    document.getElementById("lawhash").textContent = "—";
+  }
+}
+loadStats();
+setInterval(loadStats, 10000);
+</script>
+
+</body>
+</html>
