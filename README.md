@@ -100,7 +100,7 @@
 ```bash
 git clone https://github.com/beaconchain-horizon/horizon-core
 cd horizon-core
-./start-all-silent.bat   # starts all 9 services
+nohup ./horizon-guardian.sh &   # starts all 9 services
 ```
 
 ### Step 1 — Verify full chain state
@@ -220,7 +220,7 @@ curl -i -X POST localhost:8080/api/v1/license/verify -H "Content-Type: applicati
 
 | Phase | Capability | Status |
 |:-----:|:-----------|:------:|
-| 1 | Single-node Ledger | DONE |
+| 1 | 7-Node Consensus Engine | DONE |
 | 2 | Air-Gap Mode | DONE |
 | 3 | Dual Control | DONE |
 | 4 | Industrial Anchor | DONE |
@@ -241,7 +241,7 @@ curl -i -X POST localhost:8080/api/v1/license/verify -H "Content-Type: applicati
 | 2026-10-16 | Block 2 — `HORIZON-GOLD-002` | ✅ |
 | 2026-10-16 | Block 4 — `HORIZON-GOLD-004` | ✅ |
 | 2026-10-16 | 192 attack vectors — 100% blocked | ✅ |
-| 2026-10-16 | TPS benchmark — 308,641 peak | ✅ |
+| 2026-10-16 | TPS benchmark — 204,081 peak | ✅ |
 | 2026-10-16 | Pending queue persistence — validated | ✅ |
 | 2026-10-16 | Buffer guard — 413 on 20MB | ✅ |
 
