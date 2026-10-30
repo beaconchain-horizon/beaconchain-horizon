@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizon Core | Enterprise Order Portal</title>
+    <title>Horizon Core | Enterprise Data Integrity</title>
     <style>
         :root {
-            --bg-color: #0d1117;
-            --panel-bg: #161b22;
-            --border-color: #30363d;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent: #58a6ff;
-            --accent-green: #3fb950;
+            --bg: #0d1117; --panel: #161b22; --border: #30363d;
+            --text: #c9d1d9; --muted: #8b949e; --accent: #58a6ff; --green: #238636;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-color); color: var(--text-main); margin: 0; padding: 40px 20px; line-height: 1.6; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; line-height: 1.6; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { color: #fff; font-size: 36px; margin-bottom: 10px; letter-spacing: 2px; }
-        .header p { color: var(--text-muted); font-size: 18px; }
-        .order-box { background: var(--panel-bg); border: 2px solid var(--accent); padding: 40px; border-radius: 12px; text-align: center; margin-bottom: 40px; box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15); }
-        .order-box h2 { margin-top: 0; color: #fff; }
-        .order-btn { display: inline-block; background: #238636; color: #fff; padding: 16px 32px; font-size: 20px; font-weight: bold; text-decoration: none; border-radius: 6px; margin: 20px 0; transition: 0.3s; border: 1px solid #2ea043; }
-        .order-btn:hover { background: #2ea043; transform: scale(1.02); }
-        .trust-signals { display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
-        .trust-badge { color: var(--accent-green); font-weight: bold; font-size: 14px; }
-        .panel { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; margin-bottom: 25px; }
-        .panel h3 { color: var(--accent); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
-        .terminal { background: #000; padding: 15px; border-radius: 6px; font-family: 'Courier New', monospace; color: var(--accent-green); font-size: 14px; white-space: pre-wrap; border: 1px solid var(--border-color); }
-        .footer { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 50px; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .header h1 { color: #fff; font-size: 42px; margin-bottom: 10px; letter-spacing: 2px; }
+        .header p { color: var(--muted); font-size: 18px; }
+        
+        .actions { display: flex; gap: 20px; justify-content: center; margin-bottom: 50px; flex-wrap: wrap; }
+        .btn { padding: 16px 32px; font-size: 18px; font-weight: bold; text-decoration: none; border-radius: 8px; transition: 0.3s; text-align: center; display: inline-block; border: 2px solid transparent; }
+        .btn-primary { background: var(--green); color: white; border-color: #2ea043; }
+        .btn-primary:hover { background: #2ea043; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(35, 134, 54, 0.4); }
+        .btn-secondary { background: var(--panel); color: var(--accent); border-color: var(--accent); }
+        .btn-secondary:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+
+        .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-bottom: 25px; }
+        .panel h3 { color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 0; }
+        .terminal { background: #000; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; color: var(--green); font-size: 14px; white-space: pre-wrap; border: 1px solid var(--border); }
+        
+        .footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 50px; border-top: 1px solid var(--border); padding-top: 20px; }
     </style>
 </head>
 <body>
@@ -38,17 +36,10 @@
             <p>Enterprise-Grade · Air-Gap Ready · Cryptographically Verifiable</p>
         </div>
 
-        <div class="order-box">
-            <h2>Secure Your Infrastructure</h2>
-            <p style="color: var(--text-muted);">To request enterprise licensing, source code audits, or expert consultation, please place your order through our officially verified US partner portal. All inquiries are legally binding and routed securely.</p>
-            
-            <a href="https://experts.godaddy.com/mahdi-amolimoghaddam?ref=submittable" target="_blank" class="order-btn">🛡️ Place Order via Verified GoDaddy Portal</a>
-            
-            <div class="trust-signals">
-                <span class="trust-badge">✅ GoDaddy Verified Expert</span>
-                <span class="trust-badge">✅ EU GDPR Compliant (GBG)</span>
-                <span class="trust-badge">✅ Microsoft Certified</span>
-            </div>
+        <!-- دکمه‌های اصلی برای مشتری -->
+        <div class="actions">
+            <a href="https://experts.godaddy.com/mahdi-amolimoghaddam?ref=submittable" target="_blank" class="btn btn-primary">🛡️ Order via Verified GoDaddy Portal</a>
+            <a href="./downloads/horizon-trial-nicico-real.zip" class="btn btn-secondary">📦 Download Trial Package (19.3 MB)</a>
         </div>
 
         <div class="panel">
@@ -62,7 +53,7 @@ Failed Batches:  0
         </div>
 
         <div class="panel">
-            <h3>2. Unbreakable Consensus (Terminal Proof)</h3>
+            <h3>2. Unbreakable Consensus (7 Nodes)</h3>
             <p>7-Node Horizon Angel Network in perfect sync:</p>
             <div class="terminal">$ ./verify_architecture.sh
 [1] Verifying Horizon Angel Network (7 Nodes Consensus)
@@ -73,7 +64,7 @@ Failed Batches:  0
         </div>
 
         <div class="panel">
-            <h3>3. Military-Grade Security (Terminal Proof)</h3>
+            <h3>3. Military-Grade Security</h3>
             <p>Fail-Closed mechanism blocks 199+ attack vectors:</p>
             <div class="terminal">$ ./verify_architecture.sh
 [3] Verifying Security & Fail-Closed Mechanism
