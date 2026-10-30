@@ -25,7 +25,19 @@ Here is the exact terminal proof from our live 7-node network:
   SQL: db.Model(&License{}).Where("status = ? AND used + ? <= volume", "active", count).UpdateColumn(...)
   🏆 PROOF: Atomic Reservation enforced BEFORE execution.
 
-## How to Participate
-1. Download the Trial Package from our GitHub Releases.
-2. Run it in an isolated Docker environment.
-3. If you find a bypass, open an Issue with your curl payload.
+## 🛠️ How to Test (For Hackers)
+Since our architecture is Offline-First and Air-Gap ready, there is no public API to attack. You must attack it locally:
+
+1. **Download the Trial Package:**
+   Go to: https://github.com/beaconchain-horizon/horizon-core/releases
+   Download the latest `trial` zip file.
+
+2. **Run the Isolated Environment:**
+   Extract the zip. Run the `start.bat` (Windows) or use the provided Docker setup.
+   The Backend will run on port `8080` and the Switch on port `8091`.
+
+3. **Launch Your Attack:**
+   Use `curl`, Postman, or your custom scripts to bombard the Switch (`/api/v1/tx/batch`) with concurrent requests. Try to bypass the atomic SQL check or crash the server.
+
+4. **Report a Vulnerability:**
+   If you successfully bypass the limit or crash the node, open an Issue with your `curl` payload and terminal output. We will reward verified critical vulnerabilities.
