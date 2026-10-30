@@ -1,108 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beaconchain Horizon — Offline-First Tamper-Evident Ledger</title>
-<meta name="description" content="Beaconchain Horizon — offline-first tamper-evident ledger for banking, industry, and air-gapped environments.">
-  <link rel="stylesheet" href="assets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Core | Enterprise Order Portal</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --panel-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --accent-green: #3fb950;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-color); color: var(--text-main); margin: 0; padding: 40px 20px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { color: #fff; font-size: 36px; margin-bottom: 10px; }
+        .header p { color: var(--text-muted); font-size: 18px; }
+        .order-box { background: var(--panel-bg); border: 2px solid var(--accent); padding: 40px; border-radius: 12px; text-align: center; margin-bottom: 40px; box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15); }
+        .order-box h2 { margin-top: 0; color: #fff; }
+        .order-btn { display: inline-block; background: #238636; color: #fff; padding: 16px 32px; font-size: 20px; font-weight: bold; text-decoration: none; border-radius: 6px; margin: 20px 0; transition: 0.3s; border: 1px solid #2ea043; }
+        .order-btn:hover { background: #2ea043; transform: scale(1.02); }
+        .trust-signals { display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
+        .trust-badge { color: var(--accent-green); font-weight: bold; font-size: 14px; }
+        .panel { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; margin-bottom: 25px; }
+        .panel h3 { color: var(--accent); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .terminal { background: #000; padding: 15px; border-radius: 6px; font-family: 'Courier New', monospace; color: var(--accent-green); font-size: 14px; white-space: pre-wrap; border: 1px solid var(--border-color); }
+        .footer { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 50px; border-top: 1px solid var(--border-color); padding-top: 20px; }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>HORIZON CORE</h1>
+            <p>Enterprise-Grade · Air-Gap Ready · Cryptographically Verifiable</p>
+        </div>
 
-<nav>
-  <div class="brand">🔭 BEACONCHAIN HORIZON</div>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="monitor.html">Monitor</a></li>
-    <li><a href="news.html">News</a></li>
-    <li><a href="pricing.html">Pricing</a></li><li><a href="verify.html">Verify</a></li>
-    <li><a href="https://github.com/beaconchain-horizon" target="_blank">GitHub</a></li>
-  </ul>
-</nav>
+        <div class="order-box">
+            <h2>Secure Your Infrastructure</h2>
+            <p style="color: var(--text-muted);">To request enterprise licensing, source code audits, or expert consultation, please place your order through our officially verified US partner portal. All inquiries are legally binding and routed securely.</p>
+            
+            <a href="https://experts.godaddy.com/mahdi-amolimoghaddam?ref=submittable" target="_blank" class="order-btn">🛡️ Place Order via Verified GoDaddy Portal</a>
+            
+            <div class="trust-signals">
+                <span class="trust-badge">✅ GoDaddy Verified Expert</span>
+                <span class="trust-badge">✅ EU GDPR Compliant (GBG)</span>
+                <span class="trust-badge">✅ Microsoft Certified</span>
+            </div>
+        </div>
 
-<header>
-<pre>
-  ██╗  ██╗ ██████╗ ██████╗ ██╗███████╗ ██████╗ ███╗   ██╗
-  ██║  ██║██╔═══██╗██╔══██╗██║╚══███╔╝██╔═══██╗████╗  ██║
-  ███████║██║   ██║██████╔╝██║  ███╔╝ ██║   ██║██╔██╗ ██║
-  ██╔══██║██║   ██║██╔══██╗██║ ███╔╝  ██║   ██║██║╚██╗██║
-  ██║  ██║╚██████╔╝██║  ██║██║███████╗╚██████╔╝██║ ╚████║
-  ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝
-</pre>
-<h1>Offline-First Tamper-Evident Ledger</h1>
-<p>Banking · Industry · Air-Gap · Cryptographic Audit</p>
-</header>
-<section>
-  <h2>Live Network State</h2>
-  <div class="cards">
-    <div class="card"><h3>Chain Height</h3><div class="value" id="height">—</div></div>
-    <div class="card"><h3>Total TX</h3><div class="value" id="txtotal">—</div></div>
-    <div class="card"><h3>Node Law</h3><div class="value" id="lawhash">—</div></div>
-    <div class="card"><h3>Peak TPS</h3><div class="value">308,641</div></div>
-  </div>
-</section>
+        <div class="panel">
+            <h3>1. Proven Performance (Terminal Proof)</h3>
+            <p>Parallel execution result (500,000 transactions):</p>
+            <div class="terminal">$ ./parallel_tps_test.sh
+Batches:         5
+Processed:       500,000 transactions
+Failed Batches:  0
+🚀 REAL TPS:     348,432</div>
+        </div>
 
-<section>
-  <h2>Quick Access</h2>
-  <div class="links">
-    <a href="monitor.html">Live Monitor <span class="arrow">→</span></a>
-    <a href="news.html">Blockchain News <span class="arrow">→</span></a>
-    <a href="verify.html">Independent Verification <span class="arrow">→</span></a>
-    <a href="https://beaconchain-horizon.github.io/horizon-security-assessment/offline-license.html" target="_blank">License Generator <span class="arrow">→</span></a>
-    <a href="https://github.com/beaconchain-horizon/beaconchain-horizon" target="_blank">Audit Report <span class="arrow">→</span></a>
-  </div>
-</section>
-<section>
-  <h2>Independent Verification — Terminal Commands</h2>
-  <p style="color:var(--muted);margin-bottom:16px;font-size:14px;">Every claim in this system can be verified from a fresh terminal. No vendor trust required.</p>
+        <div class="panel">
+            <h3>2. Unbreakable Consensus (Terminal Proof)</h3>
+            <p>7-Node Horizon Angel Network in perfect sync:</p>
+            <div class="terminal">$ ./verify_architecture.sh
+[1] Verifying Horizon Angel Network (7 Nodes Consensus)
+  ✅ Node :9001 -> Law Hash: 3ac449e02f8e6410...
+  ✅ Node :9002 -> Law Hash: 3ac449e02f8e6410...
+  ...
+  🏆 PROOF: All 7 nodes share IDENTICAL law_hash.</div>
+        </div>
 
-  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:20px;font-family:monospace;font-size:13px;line-height:1.8;overflow-x:auto;">
-    <div style="color:var(--muted);margin-bottom:6px;"># 1 — Clone the audit repository (public)</div>
-    <div style="color:var(--accent);">$ git clone github.com/beaconchain-horizon/beaconchain-horizon</div>
-    <div style="height:12px;"></div>
-    <div style="color:var(--muted);margin-bottom:6px;"># 2 — Verify chain integrity (requires running ledger)</div>
-    <div style="color:var(--accent);">$ curl -s localhost:8080/api/v1/chain/info</div>
-    <div style="height:12px;"></div>
-    <div style="color:var(--muted);margin-bottom:6px;"># 3 — Inspect all blocks and transactions</div>
-    <div style="color:var(--accent);">$ curl -s "localhost:8080/api/v1/blocks?limit=10"</div>
-    <div style="height:12px;"></div>
-    <div style="color:var(--muted);margin-bottom:6px;"># 4 — Run the TPS benchmark</div>
-    <div style="color:var(--accent);">$ bash tps-report.sh</div>
-    <div style="height:12px;"></div>
-    <div style="color:var(--muted);margin-bottom:6px;"># 5 — Run the 192-vector security suite</div>
-    <div style="color:var(--accent);">$ ./pentest.exe -url http://localhost:8080</div>
-    <div style="height:12px;"></div>
-    <div style="color:var(--muted);margin-bottom:6px;"># 6 — Verify any block signature with secp256k1</div>
-    <div style="color:var(--accent);">$ openssl pkeyutl -verify -pubin -inkey pub.pem ...</div>
-    <div style="height:16px;"></div>
-    <div style="color:var(--muted);font-size:12px;border-top:1px solid var(--border);padding-top:12px;">Standards: <span style="color:var(--accent);">secp256k1 (SEC 2)</span> · <span style="color:var(--accent);">RFC 6979</span> · <span style="color:var(--accent);">BIP-62</span> · <span style="color:var(--accent);">FIPS 180-4</span> · <span style="color:var(--accent);">ISO/IEC 25010</span></div>
-  </div>
-</section>
-<footer>
-  <p>© 2026 Beaconchain Horizon · Offline · Verifiable · Industrial-Grade</p>
-  <p style="margin-top:8px;font-size:11px;">secp256k1 · RFC 6979 · BIP-62 · FIPS 180-4 · ISO/IEC 25010</p>
-</footer>
+        <div class="panel">
+            <h3>3. Military-Grade Security (Terminal Proof)</h3>
+            <p>Fail-Closed mechanism blocks 199+ attack vectors (SQLi, XSS, Auth Bypass):</p>
+            <div class="terminal">$ ./verify_architecture.sh
+[3] Verifying Security & Fail-Closed Mechanism
+  SQLi...... BLOCKED (400)
+  AuthBypass BLOCKED (401)
+  XSS....... BLOCKED (401)
+  🏆 PROOF: System is Fail-Closed.</div>
+        </div>
 
-<script>
-async function loadStats() {
-  try {
-    const BE = "http://localhost:8080";
-    const r1 = await fetch(BE + "/api/v1/chain/info");
-    const j = await r1.json();
-    document.getElementById("height").textContent = j.height;
-    document.getElementById("txtotal").textContent = j.tx_total;
-    const r2 = await fetch("http://localhost:9001/health");
-    const h = await r2.json();
-    document.getElementById("lawhash").textContent = h.law_hash.slice(0, 12) + "…";
-  } catch (e) {
-    document.getElementById("height").textContent = "offline";
-    document.getElementById("txtotal").textContent = "—";
-    document.getElementById("lawhash").textContent = "—";
-  }
-}
-loadStats();
-setInterval(loadStats, 10000);
-</script>
-
+        <div class="footer">
+            Horizon Core v1.4 · Trust, Verify, Move Forward
+        </div>
+    </div>
 </body>
 </html>
