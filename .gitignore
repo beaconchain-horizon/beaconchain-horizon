@@ -1,0 +1,8 @@
+*.log
+clean_*.go
+*_fix*.sh
+fix_*.sh
+rebuild_*.sh
+restore_*.sh
+safe_*.sh
+Law
