@@ -1,0 +1,28 @@
+{
+  "certificate_type": "industrial-sovereign-ledger",
+  "version": "1.4",
+  "issued_at": "2026-11-03T14:59:53Z",
+  "issuer": "Horizon Core Authority",
+  "chain": {
+    "chain_id": "horizon-core-v1.4",
+    "genesis_hash": "8c0763dd5b1345cba0782f03163e8a69de49bede54c91bb878126742c7990603",
+    "block_1_hash": "f981652e6c25945a2655b83f7536524441422bdeb7b9742a30a5256cd637ceba",
+    "authority_pubkey": "04cf6aaaba8e7a6fddde63a2e2588553dc95503d2de6b2a5c78f4a30a0b91b0aca4d28d06fc1ccbaf730abe1dcda7c29726dab18008353b521c9253c04b1641214"
+  },
+  "certified": {
+    "air_gap": true,
+    "zero_storage_keys": true,
+    "consensus": "PBFT 8-node",
+    "crypto": "secp256k1 native",
+    "merkle": "binary+ternary",
+    "constitution_laws": 7
+  },
+  "performance_verified": {
+    "ingestion_tps": 265000,
+    "consensus_tps": 5618,
+    "storage_reduction_pct": 99.85,
+    "tested_at": "2026-11-03"
+  },
+  "industries": ["oil-gas", "banking", "scada", "power-grid", "water", "government", "defense", "sovereign-networks"],
+  "signature": "180ae3e3d2370d04506b719a91a3be9e7e45b43afc5b8969356e7fbff346c91f153c1246f0e31ada895de15d3f586e9d56142b548a35b72b226f986feaf3beed"
+}
