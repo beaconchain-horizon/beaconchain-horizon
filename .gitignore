@@ -6,3 +6,4 @@ rebuild_*.sh
 restore_*.sh
 safe_*.sh
 Law
+*.exe
