@@ -3,34 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing — Beaconchain Horizon</title>
+    <title>Store — Horizon Core Enterprise</title>
     <link rel="stylesheet" href="assets/style.css">
     <style>
-        .pricing-header { text-align: center; margin: 40px 0 60px; }
-        .pricing-header h1 { font-size: 36px; color: var(--accent); margin-bottom: 10px; }
-        .pricing-header p { color: var(--muted); font-size: 16px; }
-        
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        
-        .price-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 30px; text-align: center; transition: transform 0.3s, border-color 0.3s; position: relative; }
+        .hero-metrics { display: flex; justify-content: center; gap: 40px; margin: 30px 0; flex-wrap: wrap; }
+        .metric-box { text-align: center; }
+        .metric-box h2 { color: var(--accent); font-size: 28px; margin-bottom: 5px; }
+        .metric-box p { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .pricing-header { text-align: center; margin: 60px 0 40px; }
+        .pricing-header h1 { font-size: 36px; color: var(--fg); margin-bottom: 10px; }
+        .pricing-header p { color: var(--muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .price-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 40px 30px; text-align: center; transition: transform 0.3s, border-color 0.3s; position: relative; display: flex; flex-direction: column; }
         .price-card:hover { transform: translateY(-5px); border-color: var(--accent2); }
-        
-        .price-card.popular { border-color: var(--accent); box-shadow: 0 0 20px rgba(126, 231, 135, 0.1); }
-        .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--bg); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        
-        .plan-name { font-size: 20px; color: var(--fg); margin-bottom: 10px; font-weight: 600; }
-        .plan-price { font-size: 32px; color: var(--accent2); font-weight: bold; margin-bottom: 20px; }
+        .price-card.popular { border-color: var(--accent); box-shadow: 0 0 30px rgba(126, 231, 135, 0.15); background: linear-gradient(180deg, var(--bg2) 0%, rgba(126, 231, 135, 0.05) 100%); }
+        .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--bg); padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+
+        .plan-name { font-size: 22px; color: var(--fg); margin-bottom: 10px; font-weight: 600; }
+        .plan-desc { color: var(--muted); font-size: 14px; margin-bottom: 20px; min-height: 40px; }
+        .plan-price { font-size: 36px; color: var(--accent2); font-weight: bold; margin-bottom: 30px; }
         .plan-price span { font-size: 14px; color: var(--muted); font-weight: normal; }
-        
-        .plan-features { list-style: none; padding: 0; margin: 0 0 30px; text-align: left; }
-        .plan-features li { padding: 10px 0; border-bottom: 1px solid var(--border); color: var(--fg); font-size: 14px; }
+
+        .plan-features { list-style: none; padding: 0; margin: 0 0 30px; text-align: left; flex-grow: 1; }
+        .plan-features li { padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--fg); font-size: 14px; }
         .plan-features li:last-child { border-bottom: none; }
-        .plan-features li::before { content: '✓'; color: var(--accent); margin-right: 10px; font-weight: bold; }
-        
-        .btn-buy { display: inline-block; width: 100%; padding: 12px; background: transparent; border: 1px solid var(--accent2); color: var(--accent2); border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .plan-features li::before { content: '🛡️'; margin-right: 10px; font-size: 12px; }
+
+        .btn-buy { display: block; width: 100%; padding: 14px; background: transparent; border: 1px solid var(--accent2); color: var(--accent2); border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; font-size: 16px; }
         .btn-buy:hover { background: var(--accent2); color: var(--bg); }
         .popular .btn-buy { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-        .popular .btn-buy:hover { background: var(--accent2); border-color: var(--accent2); }
+        .popular .btn-buy:hover { background: #58a6ff; border-color: #58a6ff; color: var(--bg); }
     </style>
 </head>
 <body>
@@ -39,74 +43,76 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="monitor.html">Monitor</a></li>
-            <li><a href="pricing.html" style="color: var(--accent);">Pricing</a></li>
+            <li><a href="pricing.html" style="color: var(--accent); font-weight: bold;">Store / Pricing</a></li>
             <li><a href="verify.html">Verify</a></li>
-            <li><a href="https://github.com/beaconchain-horizon" target="_blank">GitHub</a></li>
+            <li><a href="offline-license.html">Offline License</a></li>
         </ul>
     </nav>
 
     <div class="pricing-header">
-        <h1>Enterprise Blockchain Pricing</h1>
-        <p>Secure your industry with our offline-first, tamper-evident ledger.</p>
+        <h1>Sovereign Industrial Ledger</h1>
+        <p>Deploy the world's most secure, air-gapped blockchain for your enterprise. Powered by 8-Node PBFT Consensus.</p>
+    </div>
+
+    <div class="hero-metrics">
+        <div class="metric-box"><h2>110,072</h2><p>TPS Ingestion</p></div>
+        <div class="metric-box"><h2>192/192</h2><p>Attacks Blocked</p></div>
+        <div class="metric-box"><h2>0</h2><p>Data Drops</p></div>
+        <div class="metric-box"><h2>8 Nodes</h2><p>PBFT Consensus</p></div>
     </div>
 
     <div class="pricing-grid">
-        <!-- STANDARD -->
+        <!-- Plan 1 -->
         <div class="price-card">
-            <div class="plan-name">STANDARD</div>
-            <div class="plan-price">80,000 IRT <span>/ package</span></div>
+            <div class="plan-name">Developer Node</div>
+            <div class="plan-desc">For testing and integration. SQLite offline mode.</div>
+            <div class="plan-price">Free<span> / testnet</span></div>
             <ul class="plan-features">
-                <li>20,000 Transactions</li>
-                <li>1 Dedicated Switch</li>
-                <li>Standard Support</li>
-                <li>Local Deployment</li>
+                <li>SQLite Database (Air-Gap)</li>
+                <li>Basic Consensus Engine</li>
+                <li>1 License for testing</li>
+                <li>Localhost deployment</li>
             </ul>
-            <a href="#" class="btn-buy" onclick="alert('Contact us to purchase.')">Select Plan</a>
+            <a href="offline-license.html" class="btn-buy">Get Test License</a>
         </div>
 
-        <!-- BUSINESS -->
-        <div class="price-card">
-            <div class="plan-name">BUSINESS</div>
-            <div class="plan-price">120,000 IRT <span>/ package</span></div>
-            <ul class="plan-features">
-                <li>30,000 Transactions</li>
-                <li>Multi-Room Setup</li>
-                <li>Priority Support</li>
-                <li>Air-Gap Ready</li>
-            </ul>
-            <a href="#" class="btn-buy" onclick="alert('Contact us to purchase.')">Select Plan</a>
-        </div>
-
-        <!-- PREMIUM -->
+        <!-- Plan 2 -->
         <div class="price-card popular">
             <div class="popular-badge">MOST POPULAR</div>
-            <div class="plan-name">PREMIUM</div>
-            <div class="plan-price">160,000 IRT <span>/ package</span></div>
+            <div class="plan-name">Enterprise Core</div>
+            <div class="plan-desc">For Banks, SCADA, and Industrial operations.</div>
+            <div class="plan-price">$50,000<span> / year</span></div>
             <ul class="plan-features">
-                <li>40,000 Transactions</li>
-                <li>Full 7-Node Consensus</li>
-                <li>24/7 Dedicated Support</li>
-                <li>Custom Merkle Type</li>
+                <li><strong>Dual-Database:</strong> SQLite + PostgreSQL</li>
+                <li><strong>110,000 TPS</strong> Ingestion Speed</li>
+                <li>8-Node PBFT Consensus</li>
+                <li>192/192 Pentest Vectors Passed</li>
+                <li>License Enforcement (402)</li>
+                <li>Priority Support & Updates</li>
             </ul>
-            <a href="#" class="btn-buy" onclick="alert('Contact us to purchase.')">Select Plan</a>
+            <a href="mailto:sales@beaconchain.us?subject=Enterprise%20Core%20Purchase" class="btn-buy">Contact Sales</a>
         </div>
 
-        <!-- ENTERPRISE -->
+        <!-- Plan 3 -->
         <div class="price-card">
-            <div class="plan-name">ENTERPRISE</div>
-            <div class="plan-price">200,000 IRT <span>/ package</span></div>
+            <div class="plan-name">Sovereign Air-Gap</div>
+            <div class="plan-desc">For Government and Defense. Zero-Storage Keys.</div>
+            <div class="plan-price">Custom</div>
             <ul class="plan-features">
-                <li>50,000 Transactions</li>
-                <li>Unlimited Customization</li>
-                <li>On-Site Installation</li>
-                <li>Government Grade</li>
+                <li><strong>Stuxnet-Family Proof</strong></li>
+                <li>USB-Only Zero-Storage Keys</li>
+                <li>Fully Offline Deployment</li>
+                <li>Ternary Merkle Storage (99.85% reduction)</li>
+                <li>Dedicated Agent Guardian Node</li>
+                <li>On-site Setup & Audit</li>
             </ul>
-            <a href="#" class="btn-buy" onclick="alert('Contact us to purchase.')">Contact Sales</a>
+            <a href="mailto:sales@beaconchain.us?subject=Sovereign%20Air-Gap%20Deployment" class="btn-buy">Request Demo</a>
         </div>
     </div>
 
-    <footer style="margin-top: 60px;">
-        <p>© 2026 Beaconchain Horizon · Offline · Verifiable · Industrial-Grade</p>
-    </footer>
+    <div style="text-align: center; margin-top: 60px; padding-bottom: 60px; color: var(--muted); font-size: 14px;">
+        All plans include the mathematical proof of the Dual Merkle Tree and ECDSA secp256k1 signatures.<br>
+        <strong>Zero PEM. Zero Trust. Maximum Security.</strong>
+    </div>
 </body>
 </html>
